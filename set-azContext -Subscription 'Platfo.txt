@@ -1,0 +1,21 @@
+set-azContext -Subscription 'Platform Data DEV'
+$tags = @{
+        "application"="DBOMautomation"; 
+        "snowGroup"= "DSS SQL DBA";
+        "owner"= "devvootukur@fdic.gov";
+        "division"= "DIT";
+        "env"= "DEV";
+        "csamBoundary"= "dbom-azure";
+        "secondaryPoc"= "SQLDBA@FDIC.gov";
+        "DBOMPOC"= "SQLDBA@FDIC.GOV";
+        "workload"= "DBOM";
+        "poc"= "monajmeddine@fdic.gov"
+    }
+
+$resourceId = '/subscriptions/7123500e-b7a8-4caa-bd76-792b8fca02f2/resourceGroups/RGP-DATA-DBOM-EAST-D/providers/Microsoft.Sql/managedInstances/sqlmimemcgeusd/databases/AgentDB'
+get-AzTag -ResourceId $resourceid
+$resourceId2 = '/subscriptions/7123500e-b7a8-4caa-bd76-792b8fca02f2/resourceGroups/RGP-DATA-DBOM-WEST-D/providers/Microsoft.Sql/managedInstances/sqlmimemcgwusd/databases/AgentDB'
+get-AzTag -ResourceId $resourceid
+Update-AzTag -ResourceId $resourceid -Tag $tags -Operation Merge
+get-AzTag -ResourceId $resourceid2
+Update-AzTag -ResourceId $resourceid2 -Tag $tags -Operation Merge
