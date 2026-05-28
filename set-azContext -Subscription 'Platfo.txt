@@ -39,3 +39,30 @@ az tag update --resource-id "$resourceId" --operation Merge --tags $tags
 # View and update tags for the second resource (Merge operation)
 az tag list --resource-id "$resourceId2"
 az tag update --resource-id "$resourceId2" --operation Merge --tags $tags
+
+
+
+#!/bin/bash
+# file: update_azure_tags.sh
+
+# Exit immediately if any command fails
+set -e
+
+# Set the active subscription
+az account set --subscription "Platform Data DEV"
+
+# Define tags as space-separated KEY=VALUE pairs
+tags="application=DBOMautomation snowGroup=\"DSS SQL DBA\" owner=devvootukur@fdic.gov division=DIT env=DEV csamBoundary=dbom-azure secondaryPoc=SQLDBA@FDIC.gov DBOMPOC=SQLDBA@FDIC.GOV workload=DBOM poc=monajmeddine@fdic.gov"
+
+# Define resource IDs
+resourceId="/subscriptions/7123500e-b7a8-4caa-bd76-792b8fca02f2/resourceGroups/RGP-DATA-DBOM-EAST-D/providers/Microsoft.Sql/managedInstances/sqlmimemcgeusd/databases/AgentDB"
+resourceId2="/subscriptions/7123500e-b7a8-4caa-bd76-792b8fca02f2/resourceGroups/RGP-DATA-DBOM-WEST-D/providers/Microsoft.Sql/managedInstances/sqlmimemcgwusd/databases/AgentDB"
+
+# View and update tags for the first resource
+az tag list --resource-id "$resourceId"
+az tag update --resource-id "$resourceId" --operation Merge --tags $tags
+
+# View and update tags for the second resource
+az tag list --resource-id "$resourceId2"
+az tag update --resource-id "$resourceId2" --operation Merge --tags $tags
+
