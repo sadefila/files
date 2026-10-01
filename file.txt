@@ -1,0 +1,4 @@
+- name: Authenticate using kinit via stdin
+  ansible.builtin.command: kinit sql_user@YOURDOMAIN.COM
+  args:
+    stdin: "{{ windows_credential_password }}"
